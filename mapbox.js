@@ -346,10 +346,13 @@ function updateInsetLayer(bounds) {
     insetMap.getSource('boundsSource').setData(bounds);
 }
 
+map.on("load", function () {
+    // Your existing map initialization code
 
+    // After your map is loaded and configured, call scroller1.resize
+    scroller1.resize();
+});
 
-// setup resize event
-window.addEventListener('resize', scroller1.resize);
 
 
 

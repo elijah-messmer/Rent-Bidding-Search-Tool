@@ -363,477 +363,477 @@ window.addEventListener('resize', scroller1.resize);
 
 
 // Start code for explorable
-document.addEventListener('DOMContentLoaded', function() {
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZWxpamFoLW1lc3NtZXIiLCJhIjoiY2xuY2RscTZwMGZoZjJwc21hcmNsa2MzYiJ9.RLyE4QKOFzQEz9-SyExFmw';
-    const map2 = new mapboxgl.Map({
-        container: 'dashboard',
-        style: 'mapbox://styles/elijah-messmer/cln4vvc0x06wc01ns1l7m0b8m',
-        center: centerVar,
-        zoom: zoomVar,
-    });
+// document.addEventListener('DOMContentLoaded', function() {
+//     mapboxgl.accessToken = 'pk.eyJ1IjoiZWxpamFoLW1lc3NtZXIiLCJhIjoiY2xuY2RscTZwMGZoZjJwc21hcmNsa2MzYiJ9.RLyE4QKOFzQEz9-SyExFmw';
+//     const map2 = new mapboxgl.Map({
+//         container: 'dashboard',
+//         style: 'mapbox://styles/elijah-messmer/cln4vvc0x06wc01ns1l7m0b8m',
+//         center: centerVar,
+//         zoom: zoomVar,
+//     });
 
-    map2.scrollZoom.disable();
-    map2.dragPan.disable();
+//     map2.scrollZoom.disable();
+//     map2.dragPan.disable();
 
-    function updateLegend1_1() {
-    const title = 'Percent of apartments bid up';
-    const colors = ['#6ff6f6', '#05638f'];  // Define the start and end colors for the gradient
+//     function updateLegend1_1() {
+//     const title = 'Percent of apartments bid up';
+//     const colors = ['#6ff6f6', '#05638f'];  // Define the start and end colors for the gradient
 
-    d3.select('#legend2').transition().duration(1000).style('opacity', 1);
+//     d3.select('#legend2').transition().duration(1000).style('opacity', 1);
 
-    const legend = document.querySelector('#legend2');
+//     const legend = document.querySelector('#legend2');
 
-    const legendTitle = legend.querySelector('.legend-title2');
-    legendTitle.textContent = title;
+//     const legendTitle = legend.querySelector('.legend-title2');
+//     legendTitle.textContent = title;
 
-    const existingContainer = legend.querySelector('.gradient-marks-container');
-    if (existingContainer) {
-        // Update the marks only if the container exists
-        const marksContainer = existingContainer.querySelector('.legend-marks');
-        marksContainer.innerHTML = ''; // Clear existing marks
-        const marks = ['0%', '13%', '26%'];
-        marks.forEach((mark, index) => {
-            const markElement = document.createElement('div');
-            markElement.classList.add('legend-mark');
-            markElement.textContent = mark;
-            if (index === 0) {
-                markElement.style.textAlign = 'left';
-            } else if (index === marks.length - 1) {
-                markElement.style.textAlign = 'right';
-            }
-            marksContainer.appendChild(markElement);
-        });
-    } else {
-        // If container doesn't exist, create and append it
-        const gradientMarksContainer = document.createElement('div');
-        gradientMarksContainer.classList.add('gradient-marks-container');
-        gradientMarksContainer.innerHTML = `
-            <div class="legend-title2 added">${title}</div>
-            <div class="legend-gradient" style="background-image: linear-gradient(to right, ${colors[0]}, ${colors[1]})"></div>
-            <div class="legend-marks"></div>
-        `;
+//     const existingContainer = legend.querySelector('.gradient-marks-container');
+//     if (existingContainer) {
+//         // Update the marks only if the container exists
+//         const marksContainer = existingContainer.querySelector('.legend-marks');
+//         marksContainer.innerHTML = ''; // Clear existing marks
+//         const marks = ['0%', '13%', '26%'];
+//         marks.forEach((mark, index) => {
+//             const markElement = document.createElement('div');
+//             markElement.classList.add('legend-mark');
+//             markElement.textContent = mark;
+//             if (index === 0) {
+//                 markElement.style.textAlign = 'left';
+//             } else if (index === marks.length - 1) {
+//                 markElement.style.textAlign = 'right';
+//             }
+//             marksContainer.appendChild(markElement);
+//         });
+//     } else {
+//         // If container doesn't exist, create and append it
+//         const gradientMarksContainer = document.createElement('div');
+//         gradientMarksContainer.classList.add('gradient-marks-container');
+//         gradientMarksContainer.innerHTML = `
+//             <div class="legend-title2 added">${title}</div>
+//             <div class="legend-gradient" style="background-image: linear-gradient(to right, ${colors[0]}, ${colors[1]})"></div>
+//             <div class="legend-marks"></div>
+//         `;
 
-        const marksContainer = gradientMarksContainer.querySelector('.legend-marks');
-        const marks = ['0%', '13%', '26%'];
-        marks.forEach((mark, index) => {
-            const markElement = document.createElement('div');
-            markElement.classList.add('legend-mark');
-            markElement.textContent = mark;
-            if (index === 0) {
-                markElement.style.textAlign = 'left';
-            } else if (index === marks.length - 1) {
-                markElement.style.textAlign = 'right';
-            }
-            marksContainer.appendChild(markElement);
-        });
+//         const marksContainer = gradientMarksContainer.querySelector('.legend-marks');
+//         const marks = ['0%', '13%', '26%'];
+//         marks.forEach((mark, index) => {
+//             const markElement = document.createElement('div');
+//             markElement.classList.add('legend-mark');
+//             markElement.textContent = mark;
+//             if (index === 0) {
+//                 markElement.style.textAlign = 'left';
+//             } else if (index === marks.length - 1) {
+//                 markElement.style.textAlign = 'right';
+//             }
+//             marksContainer.appendChild(markElement);
+//         });
 
-        // wrap all legend items in one div
-        const legendItemsDiv = document.createElement('div');
-        legendItemsDiv.classList.add('legend-items');
-        const newLegendItems = legend.querySelectorAll('.legend-item');
-        newLegendItems.forEach(item => legendItemsDiv.appendChild(item));
+//         // wrap all legend items in one div
+//         const legendItemsDiv = document.createElement('div');
+//         legendItemsDiv.classList.add('legend-items');
+//         const newLegendItems = legend.querySelectorAll('.legend-item');
+//         newLegendItems.forEach(item => legendItemsDiv.appendChild(item));
 
-        // Append the title, gradient, marks, and legend items container to the legend element
-        legend.innerHTML = ''; // Clear existing content
-        legend.appendChild(gradientMarksContainer);
-        legend.appendChild(legendItemsDiv);
-    }
-}
-
-
-function updateLegend2_2() {
-    const title = 'Percent increase from list price';
-    const marks = ['0%', '4%', '8%']; // New marks for Legend 2
-
-    const legend = document.querySelector('#legend2');
-
-    // Update legend title
-    const legendTitle = legend.querySelector('.legend-title2');
-    legendTitle.textContent = title;
-
-    // Update the marks
-    const markElements = legend.querySelectorAll('.legend-mark');
-    marks.forEach((mark, index) => {
-        markElements[index].textContent = mark;
-    });
-}
-
-    // Function for tooltips
-    function popup() {
-        let popup = null; // declare the popup variable
-
-        function showPopup(event) {
-            const feature = event.features[0];
-            let priceDifference = feature.properties.PRICE_DIFFERENCE;
-
-            let textColor;
-            let formattedPriceDifference;
-
-            if (priceDifference > 0) {
-                textColor = '#EDA229'; // Color for positive numbers
-                formattedPriceDifference = `+$${priceDifference}`;
-            } else if (priceDifference < 0) {
-                textColor = '#65AFFF'; // Color for negative numbers
-                formattedPriceDifference = `-$${Math.abs(priceDifference)}`;
-            } else {
-                textColor = '#fafafa'; // Color for zero
-                formattedPriceDifference = `$${priceDifference}`;
-            }
-
-            const fullBaths = feature.properties.NO_FULL_BATHS;
-            const halfBaths = feature.properties.NO_HALF_BATHS;
-
-            const totalBaths = fullBaths + (halfBaths / 2);
-
-            const formattedTotalBaths = totalBaths % 1 === 0 ? totalBaths.toFixed(0) : totalBaths.toFixed(1);
-
-            let popupContent = `
-                <p style='font-size: 18px; color: #fafafa; background-color: #444; padding: 0 2px 0 2px; margin-bottom: 1px'>Change from list price: <span style="color: ${textColor}; font-weight: bold;">${formattedPriceDifference}</span</p>
-                    <div style="display: flex; justify-content: space-between;">
-                        <p style="font-size: 16px; flex: 1; margin-right: 10px; margin-bottom: 0">List price:</p>
-                        <p style="font-size: 16px; margin: 0;">$${feature.properties.LIST_PRICE}</p>
-                    </div>
-                    <div style="display: flex; justify-content: space-between;">
-                        <p style="font-size: 16px; flex: 1; margin-right: 10px; margin-bottom: 0">Bedrooms:</p>
-                        <p style="font-size: 16px; margin: 0;">${feature.properties.NO_BEDROOMS}</p>
-                    </div>
-                    <div style="display: flex; justify-content: space-between;">
-                        <p style="font-size: 16px; flex: 1; margin-right: 10px; margin-bottom: 0">Bathrooms:</p>
-                        <p style="font-size: 16px; margin: 0;">${formattedTotalBaths}</p>
-                    </div>
-                    <div style="display: flex; justify-content: space-between;">
-                        <p style="font-size: 16px; flex: 1; margin-right: 10px; margin-bottom: 0">Square feet:</p>
-                        <p style="font-size: 16px; margin: 0;">${feature.properties.SQUARE_FEET}</p>
-                    </div>
-            `;
-
-            // Create and set the popup content
-            popup = new mapboxgl.Popup({
-                offset: [0, -15],
-                closeButton: false,
-            })
-                .setLngLat(feature.geometry.coordinates)
-                .setHTML(popupContent)
-                .addTo(map2);
-        }
-
-        function hidePopup() {
-            // Remove the popup when the user stops hovering over the marker.
-            if (popup) {
-                popup.remove();
-                popup = null; // reset the popup variable
-            }
-        }
-
-        // Attach event listeners for both mouseover and click/tap events
-        map2.on('mouseenter', 'rent-bidding-point-data-jitter', showPopup);
-
-        map2.on('click', 'rent-bidding-point-data-jitter', showPopup);
-
-        map2.on('mouseleave', 'rent-bidding-point-data-jitter', hidePopup);
-    }
+//         // Append the title, gradient, marks, and legend items container to the legend element
+//         legend.innerHTML = ''; // Clear existing content
+//         legend.appendChild(gradientMarksContainer);
+//         legend.appendChild(legendItemsDiv);
+//     }
+// }
 
 
-    function animateZipInfo() {
-        const zipInfo = document.getElementById('zipInfo');
-        zipInfo.style.transform = 'translateX(-100%)';
-        zipInfo.style.visibility = 'visible';
-        zipInfo.style.transition = 'transform 0.5s ease';
-        setTimeout(() => {
-            zipInfo.style.transform = 'translateX(0)';
-        }, 10);
-        const additionalStats = document.getElementById('additionalStats');
-        additionalStats.style.display = 'none';
-        const showMoreBtn = document.getElementById('showMoreButton')
-        const buttonText = showMoreBtn.querySelector('.button-text');
-        buttonText.innerText = 'View more data';
-        buttonText.setAttribute('data-text', 'show-more');
-        document.querySelector('.autocomplete').style.display = 'none';
-    }
+// function updateLegend2_2() {
+//     const title = 'Percent increase from list price';
+//     const marks = ['0%', '4%', '8%']; // New marks for Legend 2
 
-    function reverseAnimateZipInfo() {
-        const zipInfo = document.getElementById('zipInfo');
-        zipInfo.style.transform = 'translateX(0)';
-        zipInfo.style.transition = 'transform 0.5s ease';
-        zipInfo.style.transform = 'translateX(-100%)';
-        setTimeout(() => {
-            zipInfo.style.visibility = 'hidden'
-        }, 250);
+//     const legend = document.querySelector('#legend2');
+
+//     // Update legend title
+//     const legendTitle = legend.querySelector('.legend-title2');
+//     legendTitle.textContent = title;
+
+//     // Update the marks
+//     const markElements = legend.querySelectorAll('.legend-mark');
+//     marks.forEach((mark, index) => {
+//         markElements[index].textContent = mark;
+//     });
+// }
+
+//     // Function for tooltips
+//     function popup() {
+//         let popup = null; // declare the popup variable
+
+//         function showPopup(event) {
+//             const feature = event.features[0];
+//             let priceDifference = feature.properties.PRICE_DIFFERENCE;
+
+//             let textColor;
+//             let formattedPriceDifference;
+
+//             if (priceDifference > 0) {
+//                 textColor = '#EDA229'; // Color for positive numbers
+//                 formattedPriceDifference = `+$${priceDifference}`;
+//             } else if (priceDifference < 0) {
+//                 textColor = '#65AFFF'; // Color for negative numbers
+//                 formattedPriceDifference = `-$${Math.abs(priceDifference)}`;
+//             } else {
+//                 textColor = '#fafafa'; // Color for zero
+//                 formattedPriceDifference = `$${priceDifference}`;
+//             }
+
+//             const fullBaths = feature.properties.NO_FULL_BATHS;
+//             const halfBaths = feature.properties.NO_HALF_BATHS;
+
+//             const totalBaths = fullBaths + (halfBaths / 2);
+
+//             const formattedTotalBaths = totalBaths % 1 === 0 ? totalBaths.toFixed(0) : totalBaths.toFixed(1);
+
+//             let popupContent = `
+//                 <p style='font-size: 18px; color: #fafafa; background-color: #444; padding: 0 2px 0 2px; margin-bottom: 1px'>Change from list price: <span style="color: ${textColor}; font-weight: bold;">${formattedPriceDifference}</span</p>
+//                     <div style="display: flex; justify-content: space-between;">
+//                         <p style="font-size: 16px; flex: 1; margin-right: 10px; margin-bottom: 0">List price:</p>
+//                         <p style="font-size: 16px; margin: 0;">$${feature.properties.LIST_PRICE}</p>
+//                     </div>
+//                     <div style="display: flex; justify-content: space-between;">
+//                         <p style="font-size: 16px; flex: 1; margin-right: 10px; margin-bottom: 0">Bedrooms:</p>
+//                         <p style="font-size: 16px; margin: 0;">${feature.properties.NO_BEDROOMS}</p>
+//                     </div>
+//                     <div style="display: flex; justify-content: space-between;">
+//                         <p style="font-size: 16px; flex: 1; margin-right: 10px; margin-bottom: 0">Bathrooms:</p>
+//                         <p style="font-size: 16px; margin: 0;">${formattedTotalBaths}</p>
+//                     </div>
+//                     <div style="display: flex; justify-content: space-between;">
+//                         <p style="font-size: 16px; flex: 1; margin-right: 10px; margin-bottom: 0">Square feet:</p>
+//                         <p style="font-size: 16px; margin: 0;">${feature.properties.SQUARE_FEET}</p>
+//                     </div>
+//             `;
+
+//             // Create and set the popup content
+//             popup = new mapboxgl.Popup({
+//                 offset: [0, -15],
+//                 closeButton: false,
+//             })
+//                 .setLngLat(feature.geometry.coordinates)
+//                 .setHTML(popupContent)
+//                 .addTo(map2);
+//         }
+
+//         function hidePopup() {
+//             // Remove the popup when the user stops hovering over the marker.
+//             if (popup) {
+//                 popup.remove();
+//                 popup = null; // reset the popup variable
+//             }
+//         }
+
+//         // Attach event listeners for both mouseover and click/tap events
+//         map2.on('mouseenter', 'rent-bidding-point-data-jitter', showPopup);
+
+//         map2.on('click', 'rent-bidding-point-data-jitter', showPopup);
+
+//         map2.on('mouseleave', 'rent-bidding-point-data-jitter', hidePopup);
+//     }
 
 
-    }
+//     function animateZipInfo() {
+//         const zipInfo = document.getElementById('zipInfo');
+//         zipInfo.style.transform = 'translateX(-100%)';
+//         zipInfo.style.visibility = 'visible';
+//         zipInfo.style.transition = 'transform 0.5s ease';
+//         setTimeout(() => {
+//             zipInfo.style.transform = 'translateX(0)';
+//         }, 10);
+//         const additionalStats = document.getElementById('additionalStats');
+//         additionalStats.style.display = 'none';
+//         const showMoreBtn = document.getElementById('showMoreButton')
+//         const buttonText = showMoreBtn.querySelector('.button-text');
+//         buttonText.innerText = 'View more data';
+//         buttonText.setAttribute('data-text', 'show-more');
+//         document.querySelector('.autocomplete').style.display = 'none';
+//     }
 
-                    // Update the content of the zipInfo elements
-                // Assign all stats to variables for ease
-                stat0 = document.getElementById('zipCode');
-                stat1 = document.getElementById('stat1');
-                stat2 = document.getElementById('stat2');
-                stat3 = document.getElementById('stat3');
-                stat4 = document.getElementById('stat4');
-                stat5 = document.getElementById('stat5');
-                stat6 = document.getElementById('stat6');
-                stat7 = document.getElementById('stat7');
-                stat8 = document.getElementById('stat8');
-                stat9 = document.getElementById('stat9');
-                stat10 = document.getElementById('stat10');
-                stat11 = document.getElementById('stat11');
-                stat12 = document.getElementById('stat12');
-                stat13 = document.getElementById('stat13');
-                stat14 = document.getElementById('stat14');
-                stat15 = document.getElementById('stat15');
-                stat16 = document.getElementById('stat16');
-                stat17 = document.getElementById('stat17');
-                stat18 = document.getElementById('stat18');
-                stat19 = document.getElementById('stat19');
-                city1 = document.getElementById('city1');
-                city2 = document.getElementById('city2');
-                city3 = document.getElementById('city3');
-                studentPop = document.getElementById('studentPop');
+//     function reverseAnimateZipInfo() {
+//         const zipInfo = document.getElementById('zipInfo');
+//         zipInfo.style.transform = 'translateX(0)';
+//         zipInfo.style.transition = 'transform 0.5s ease';
+//         zipInfo.style.transform = 'translateX(-100%)';
+//         setTimeout(() => {
+//             zipInfo.style.visibility = 'hidden'
+//         }, 250);
 
-                async function updateStats() {
-                // You can now use the cached data in this function
-                let filteredFeatures = cache.features.filter(feature => feature.properties['POSTCODE'] === selectedZipCode);
-                        filteredFeatures.forEach(feature => {
-                            value0 = feature.properties['POSTCODE'];
-                            value1 = feature.properties['PERCENT_PRICE_DIFFERENCE'];
-                            value2 = feature.properties['PERCENT_DIFFERENCE'];
-                            value3 = feature.properties['MAX_PERCENT'];
-                            value4 = feature.properties['MIN_PERCENT'];
-                            value5 = feature.properties['RAW_DIFFERENCE'];
-                            value6 = feature.properties['MAX_DIFFERENCE'].toLocaleString();
-                            value7 = feature.properties['MIN_DIFFERENCE'];
-                            value8 = feature.properties['DIFF_FROM_CITY_PERCENT_SHARE'];
-                            value9 = feature.properties['DIFF_FROM_CITY_PERCENT'];
-                            value10 = feature.properties['DIFF_FROM_CITY_RAW'];
-                            value11 = (!isNaN(parseInt(feature.properties['POPULATION'].replace(/,/g, ''), 10)) ? (parseInt(feature.properties['POPULATION'].replace(/,/g, ''), 10) / 1000).toFixed(1) : 0);
-                            value12 = feature.properties['STUDENTS_POP'];
-                            value13 = feature.properties['PERCENT_POVERTY'];
-                            value14 = ((feature.properties['MEDIAN_INCOME'] / 1000).toFixed(1));
-                            value15 = feature.properties['BLACK'];
-                            value16 = feature.properties['LATINO'];
-                            value17 = feature.properties['WHITE'];
-                            value18 = feature.properties['ASIAN'];
-                            value19 = feature.properties['TWO_OR_MORE_RACES'];
-                            value20 = feature.properties['CITY'];
 
-                            stat0.innerHTML = `0${value0}`;
-                            stat1.innerHTML = `${value1}%`;
-                            stat2.innerHTML = `${value2}%`;
-                            stat3.innerHTML = `Max: ${value3}%`;
-                            stat4.innerHTML = `Min: ${value4}%`;
-                            stat5.innerHTML = `$${value5}`;
-                            stat6.innerHTML = `Max: $${value6}`;
-                            stat7.innerHTML = `Min: $${value7}`;
-                            stat11.innerHTML = `${value11}K`;
-                            stat12.innerHTML = value12;
-                            stat13.innerHTML = `${value13}%`;
-                            stat14.innerHTML = `$${value14}K`;
-                            stat15.innerHTML = value15;
-                            stat16.innerHTML = value16;
-                            stat17.innerHTML = value17;
-                            stat18.innerHTML = value18;
-                            stat19.innerHTML = value19;
-                            if (value8 < 0) {
-                                city1.innerHTML = `<span style="color: #7A7A7A">${value8}%</span> ${value20} average`;
-                            } else {
-                                city1.innerHTML = `<span style="color: #FBB225">+${value8}%</span> ${value20} average`;
-                            }
-                            if (value9 < 0) {
-                                city2.innerHTML = `<span style="color: #7A7A7A">${value9}%</span> ${value20} average`;
-                            } else {
-                                city2.innerHTML = `<span style="color: #FBB225">+${value9}%</span> ${value20} average`;
-                            }
-                            if (value10 < 0) {
-                                city3.innerHTML = `<span style="color: #7A7A7A">$${value10}</span> ${value20} average`;
-                            } else {
-                                city3.innerHTML = `<span style="color: #FBB225">+$${value10}</span> ${value20} average`;
-                            }
-                            if (value20 != 'Boston' || value12 === '') {
-                                studentPop.style.display = 'none';
-                            } else {
-                                studentPop.style.display = 'flex';
-                            }
-                        });
-                    };
+//     }
 
-    function zoomToLocation(coordinates) {
-        map2.flyTo({
-            center: [coordinates[0] - 0.01, coordinates[1]],
-            zoom: 13,
-            speed: 1.5
-        });
-    }
+//                     // Update the content of the zipInfo elements
+//                 // Assign all stats to variables for ease
+//                 stat0 = document.getElementById('zipCode');
+//                 stat1 = document.getElementById('stat1');
+//                 stat2 = document.getElementById('stat2');
+//                 stat3 = document.getElementById('stat3');
+//                 stat4 = document.getElementById('stat4');
+//                 stat5 = document.getElementById('stat5');
+//                 stat6 = document.getElementById('stat6');
+//                 stat7 = document.getElementById('stat7');
+//                 stat8 = document.getElementById('stat8');
+//                 stat9 = document.getElementById('stat9');
+//                 stat10 = document.getElementById('stat10');
+//                 stat11 = document.getElementById('stat11');
+//                 stat12 = document.getElementById('stat12');
+//                 stat13 = document.getElementById('stat13');
+//                 stat14 = document.getElementById('stat14');
+//                 stat15 = document.getElementById('stat15');
+//                 stat16 = document.getElementById('stat16');
+//                 stat17 = document.getElementById('stat17');
+//                 stat18 = document.getElementById('stat18');
+//                 stat19 = document.getElementById('stat19');
+//                 city1 = document.getElementById('city1');
+//                 city2 = document.getElementById('city2');
+//                 city3 = document.getElementById('city3');
+//                 studentPop = document.getElementById('studentPop');
 
-    function geocodeZipCode(zipCode) {
-        const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${zipCode}.json?access_token=${mapboxgl.accessToken}`;
+//                 async function updateStats() {
+//                 // You can now use the cached data in this function
+//                 let filteredFeatures = cache.features.filter(feature => feature.properties['POSTCODE'] === selectedZipCode);
+//                         filteredFeatures.forEach(feature => {
+//                             value0 = feature.properties['POSTCODE'];
+//                             value1 = feature.properties['PERCENT_PRICE_DIFFERENCE'];
+//                             value2 = feature.properties['PERCENT_DIFFERENCE'];
+//                             value3 = feature.properties['MAX_PERCENT'];
+//                             value4 = feature.properties['MIN_PERCENT'];
+//                             value5 = feature.properties['RAW_DIFFERENCE'];
+//                             value6 = feature.properties['MAX_DIFFERENCE'].toLocaleString();
+//                             value7 = feature.properties['MIN_DIFFERENCE'];
+//                             value8 = feature.properties['DIFF_FROM_CITY_PERCENT_SHARE'];
+//                             value9 = feature.properties['DIFF_FROM_CITY_PERCENT'];
+//                             value10 = feature.properties['DIFF_FROM_CITY_RAW'];
+//                             value11 = (!isNaN(parseInt(feature.properties['POPULATION'].replace(/,/g, ''), 10)) ? (parseInt(feature.properties['POPULATION'].replace(/,/g, ''), 10) / 1000).toFixed(1) : 0);
+//                             value12 = feature.properties['STUDENTS_POP'];
+//                             value13 = feature.properties['PERCENT_POVERTY'];
+//                             value14 = ((feature.properties['MEDIAN_INCOME'] / 1000).toFixed(1));
+//                             value15 = feature.properties['BLACK'];
+//                             value16 = feature.properties['LATINO'];
+//                             value17 = feature.properties['WHITE'];
+//                             value18 = feature.properties['ASIAN'];
+//                             value19 = feature.properties['TWO_OR_MORE_RACES'];
+//                             value20 = feature.properties['CITY'];
 
-        return fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                const coordinates = data.features[0].center;
-                return coordinates;
-            });
-    }
+//                             stat0.innerHTML = `0${value0}`;
+//                             stat1.innerHTML = `${value1}%`;
+//                             stat2.innerHTML = `${value2}%`;
+//                             stat3.innerHTML = `Max: ${value3}%`;
+//                             stat4.innerHTML = `Min: ${value4}%`;
+//                             stat5.innerHTML = `$${value5}`;
+//                             stat6.innerHTML = `Max: $${value6}`;
+//                             stat7.innerHTML = `Min: $${value7}`;
+//                             stat11.innerHTML = `${value11}K`;
+//                             stat12.innerHTML = value12;
+//                             stat13.innerHTML = `${value13}%`;
+//                             stat14.innerHTML = `$${value14}K`;
+//                             stat15.innerHTML = value15;
+//                             stat16.innerHTML = value16;
+//                             stat17.innerHTML = value17;
+//                             stat18.innerHTML = value18;
+//                             stat19.innerHTML = value19;
+//                             if (value8 < 0) {
+//                                 city1.innerHTML = `<span style="color: #7A7A7A">${value8}%</span> ${value20} average`;
+//                             } else {
+//                                 city1.innerHTML = `<span style="color: #FBB225">+${value8}%</span> ${value20} average`;
+//                             }
+//                             if (value9 < 0) {
+//                                 city2.innerHTML = `<span style="color: #7A7A7A">${value9}%</span> ${value20} average`;
+//                             } else {
+//                                 city2.innerHTML = `<span style="color: #FBB225">+${value9}%</span> ${value20} average`;
+//                             }
+//                             if (value10 < 0) {
+//                                 city3.innerHTML = `<span style="color: #7A7A7A">$${value10}</span> ${value20} average`;
+//                             } else {
+//                                 city3.innerHTML = `<span style="color: #FBB225">+$${value10}</span> ${value20} average`;
+//                             }
+//                             if (value20 != 'Boston' || value12 === '') {
+//                                 studentPop.style.display = 'none';
+//                             } else {
+//                                 studentPop.style.display = 'flex';
+//                             }
+//                         });
+//                     };
 
-    document.getElementById('zipInput').addEventListener('change', function() {
-        var zipCode = this.value;
+//     function zoomToLocation(coordinates) {
+//         map2.flyTo({
+//             center: [coordinates[0] - 0.01, coordinates[1]],
+//             zoom: 13,
+//             speed: 1.5
+//         });
+//     }
 
-        geocodeZipCode(zipCode).then(function(coordinates) {
-            zoomToLocation(coordinates);
-        });
-    });
+//     function geocodeZipCode(zipCode) {
+//         const apiUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${zipCode}.json?access_token=${mapboxgl.accessToken}`;
 
-    const zipList = document.getElementById('zipList');
-    const zipInput = document.getElementById('zipInput');
-    const zipCodes = [
-        '02134', '02125', '02110', '02118', '02126', '02109', '02113', '02130', '02121', '02119',
-        '02115', '02163', '02135', '02199', '02124', '02132', '02114', '02108', '02136', '02111',
-        '02210', '02116', '02131', '02127', '02120', '02203', '02215', '02129', '02128', '02122',
-        '02151', '02467', '02445', '02446', '02447', '02467', '02141', '02142', '02139', '02138',
-        '02140', '02143', '02144', '02145'
-    ];
+//         return fetch(apiUrl)
+//             .then(response => response.json())
+//             .then(data => {
+//                 const coordinates = data.features[0].center;
+//                 return coordinates;
+//             });
+//     }
 
-    zipInput.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase();
-        const matchingZipCodes = zipCodes.filter(zipCode => zipCode.includes(searchTerm));
-        renderAutocompleteList(matchingZipCodes);
-    });
+//     document.getElementById('zipInput').addEventListener('change', function() {
+//         var zipCode = this.value;
 
-    function renderAutocompleteList(zipCodes) {
-    zipList.innerHTML = '';
-    zipList.style.display = 'block';
+//         geocodeZipCode(zipCode).then(function(coordinates) {
+//             zoomToLocation(coordinates);
+//         });
+//     });
 
-    if (zipCodes.length > 0) {
-        zipCodes.forEach(zipCode => {
-            const listItem = document.createElement('li');
-            listItem.textContent = zipCode;
-            listItem.addEventListener('click', function() {
-                geocodeZipCode(zipCode).then(function(coordinates) {
-                    zoomToLocation(coordinates);
-                });
-                zipInput.value = zipCode;
-                zipList.style.display = 'none';
-                // Animate the zip info div
-                animateZipInfo();
+//     const zipList = document.getElementById('zipList');
+//     const zipInput = document.getElementById('zipInput');
+//     const zipCodes = [
+//         '02134', '02125', '02110', '02118', '02126', '02109', '02113', '02130', '02121', '02119',
+//         '02115', '02163', '02135', '02199', '02124', '02132', '02114', '02108', '02136', '02111',
+//         '02210', '02116', '02131', '02127', '02120', '02203', '02215', '02129', '02128', '02122',
+//         '02151', '02467', '02445', '02446', '02447', '02467', '02141', '02142', '02139', '02138',
+//         '02140', '02143', '02144', '02145'
+//     ];
+
+//     zipInput.addEventListener('input', function() {
+//         const searchTerm = this.value.toLowerCase();
+//         const matchingZipCodes = zipCodes.filter(zipCode => zipCode.includes(searchTerm));
+//         renderAutocompleteList(matchingZipCodes);
+//     });
+
+//     function renderAutocompleteList(zipCodes) {
+//     zipList.innerHTML = '';
+//     zipList.style.display = 'block';
+
+//     if (zipCodes.length > 0) {
+//         zipCodes.forEach(zipCode => {
+//             const listItem = document.createElement('li');
+//             listItem.textContent = zipCode;
+//             listItem.addEventListener('click', function() {
+//                 geocodeZipCode(zipCode).then(function(coordinates) {
+//                     zoomToLocation(coordinates);
+//                 });
+//                 zipInput.value = zipCode;
+//                 zipList.style.display = 'none';
+//                 // Animate the zip info div
+//                 animateZipInfo();
                 
-                selectedZipCode = parseInt(zipCode);
+//                 selectedZipCode = parseInt(zipCode);
 
-                // Set the opacity of the zip code outline layer to 1 for the selected zip code
-                map2.setPaintProperty('zipOutline', 'line-opacity', [
-                    'case',
-                    ['==', ['get', 'POSTCODE'], selectedZipCode],
-                    1,
-                    0
-                ]);
+//                 // Set the opacity of the zip code outline layer to 1 for the selected zip code
+//                 map2.setPaintProperty('zipOutline', 'line-opacity', [
+//                     'case',
+//                     ['==', ['get', 'POSTCODE'], selectedZipCode],
+//                     1,
+//                     0
+//                 ]);
 
-                map2.scrollZoom.enable();
-                map2.dragPan.enable();
-                updateStats();
-            });
-            zipList.appendChild(listItem);
-        });
-    } else {
-        zipList.style.display = 'none';
-    }
+//                 map2.scrollZoom.enable();
+//                 map2.dragPan.enable();
+//                 updateStats();
+//             });
+//             zipList.appendChild(listItem);
+//         });
+//     } else {
+//         zipList.style.display = 'none';
+//     }
 
-    // Add keyup event listener to zipInput
-    document.getElementById('zipInput').addEventListener('keyup', function(event) {
-        if (event.key === 'Enter') {
-            animateZipInfo();
-            const zipCode = zipInput.value;
-            selectedZipCode = parseInt(zipCode);
-            map2.setPaintProperty('zipOutline', 'line-opacity', [
-                    'case',
-                    ['==', ['get', 'POSTCODE'], selectedZipCode],
-                    1,
-                    0
-                ]);
-            map2.scrollZoom.enable();
-            map2.dragPan.enable();
-            updateStats();
-        }
-    });
-}
+//     // Add keyup event listener to zipInput
+//     document.getElementById('zipInput').addEventListener('keyup', function(event) {
+//         if (event.key === 'Enter') {
+//             animateZipInfo();
+//             const zipCode = zipInput.value;
+//             selectedZipCode = parseInt(zipCode);
+//             map2.setPaintProperty('zipOutline', 'line-opacity', [
+//                     'case',
+//                     ['==', ['get', 'POSTCODE'], selectedZipCode],
+//                     1,
+//                     0
+//                 ]);
+//             map2.scrollZoom.enable();
+//             map2.dragPan.enable();
+//             updateStats();
+//         }
+//     });
+// }
 
-    document.getElementById('zipInput').addEventListener('input', function() {
-    if (getComputedStyle(zipInfo).visibility === 'visible') {
-        reverseAnimateZipInfo();
-        map2.setPaintProperty('zipOutline', 'line-opacity', 0);
-    }
-    });
+//     document.getElementById('zipInput').addEventListener('input', function() {
+//     if (getComputedStyle(zipInfo).visibility === 'visible') {
+//         reverseAnimateZipInfo();
+//         map2.setPaintProperty('zipOutline', 'line-opacity', 0);
+//     }
+//     });
 
 
-    document.addEventListener('click', function(event) {
-        if (!zipList.contains(event.target) && event.target !== zipInput) {
-            zipList.style.display = 'none';
-        }
-    });
+//     document.addEventListener('click', function(event) {
+//         if (!zipList.contains(event.target) && event.target !== zipInput) {
+//             zipList.style.display = 'none';
+//         }
+//     });
 
-    document.querySelectorAll('.toggle-button').forEach(function(button) {
-            button.addEventListener('click', function() {
-                const selectedValue = this.getAttribute('data-value');
+//     document.querySelectorAll('.toggle-button').forEach(function(button) {
+//             button.addEventListener('click', function() {
+//                 const selectedValue = this.getAttribute('data-value');
 
-                // Remove 'active' class from all buttons
-                document.querySelectorAll('.toggle-button').forEach(function(btn) {
-                    btn.classList.remove('active');
-                });
+//                 // Remove 'active' class from all buttons
+//                 document.querySelectorAll('.toggle-button').forEach(function(btn) {
+//                     btn.classList.remove('active');
+//                 });
 
-                // Add 'active' class to the clicked button
-                this.classList.add('active');
+//                 // Add 'active' class to the clicked button
+//                 this.classList.add('active');
 
-                // Handle selected value
-                if (selectedValue === 'layer1') {
-                    map2.setPaintProperty('percent-positive-price-difference', 'fill-opacity', 0.8);
-                    map2.setPaintProperty('percent-increase-by-zipcode', 'fill-opacity', 0);
-                    updateLegend1_1();
-                } else if (selectedValue === 'layer2') {
-                    map2.setPaintProperty('percent-increase-by-zipcode', 'fill-opacity', 0.8);
-                    map2.setPaintProperty('percent-positive-price-difference', 'fill-opacity', 0);
-                    updateLegend2_2();
-                }
-            });
-        });
+//                 // Handle selected value
+//                 if (selectedValue === 'layer1') {
+//                     map2.setPaintProperty('percent-positive-price-difference', 'fill-opacity', 0.8);
+//                     map2.setPaintProperty('percent-increase-by-zipcode', 'fill-opacity', 0);
+//                     updateLegend1_1();
+//                 } else if (selectedValue === 'layer2') {
+//                     map2.setPaintProperty('percent-increase-by-zipcode', 'fill-opacity', 0.8);
+//                     map2.setPaintProperty('percent-positive-price-difference', 'fill-opacity', 0);
+//                     updateLegend2_2();
+//                 }
+//             });
+//         });
 
-document.getElementById('showMoreButton').addEventListener('click', function() {
-    const additionalStats = document.getElementById('additionalStats');
-    const buttonText = this.querySelector('.button-text');
+// document.getElementById('showMoreButton').addEventListener('click', function() {
+//     const additionalStats = document.getElementById('additionalStats');
+//     const buttonText = this.querySelector('.button-text');
     
-    if (additionalStats.style.display === 'none') {
-        additionalStats.style.display = 'block';
-        buttonText.innerText = 'Show Less';
-        buttonText.setAttribute('data-text', 'show-less');
-        additionalStats.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-    } else {
-        additionalStats.style.display = 'none';
-        buttonText.innerText = 'View more data';
-        buttonText.setAttribute('data-text', 'show-more');
-    }
-});
+//     if (additionalStats.style.display === 'none') {
+//         additionalStats.style.display = 'block';
+//         buttonText.innerText = 'Show Less';
+//         buttonText.setAttribute('data-text', 'show-less');
+//         additionalStats.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+//     } else {
+//         additionalStats.style.display = 'none';
+//         buttonText.innerText = 'View more data';
+//         buttonText.setAttribute('data-text', 'show-more');
+//     }
+// });
 
 
 
 
-let cache = null;
+// let cache = null;
 
-map2.on('load', async function() {
-    // This code will run once the style has fully loaded
-    map2.setPaintProperty('percent-positive-price-difference', 'fill-opacity', 0.8);
-    map2.setPaintProperty('rent-bidding-point-data-jitter', 'circle-opacity', 0.8);
-    map2.setPaintProperty('rent-bidding-point-data-jitter', 'circle-stroke-opacity', 0.8);
-    popup();
-    updateLegend1_1();
-    document.querySelector('.toggle-button[data-value="layer1"]').classList.add('active');
+// map2.on('load', async function() {
+//     // This code will run once the style has fully loaded
+//     map2.setPaintProperty('percent-positive-price-difference', 'fill-opacity', 0.8);
+//     map2.setPaintProperty('rent-bidding-point-data-jitter', 'circle-opacity', 0.8);
+//     map2.setPaintProperty('rent-bidding-point-data-jitter', 'circle-stroke-opacity', 0.8);
+//     popup();
+//     updateLegend1_1();
+//     document.querySelector('.toggle-button[data-value="layer1"]').classList.add('active');
 
-    // Fetch and cache data
-    if (!cache) {
-        cache = await fetch('https://api.mapbox.com/datasets/v1/elijah-messmer/clp4mth2113ih1mqdg2ay0nmi/features?access_token=pk.eyJ1IjoiZWxpamFoLW1lc3NtZXIiLCJhIjoiY2xuY2RscTZwMGZoZjJwc21hcmNsa2MzYiJ9.RLyE4QKOFzQEz9-SyExFmw')
-            .then(response => response.json());
-    }
-    });
+//     // Fetch and cache data
+//     if (!cache) {
+//         cache = await fetch('https://api.mapbox.com/datasets/v1/elijah-messmer/clp4mth2113ih1mqdg2ay0nmi/features?access_token=pk.eyJ1IjoiZWxpamFoLW1lc3NtZXIiLCJhIjoiY2xuY2RscTZwMGZoZjJwc21hcmNsa2MzYiJ9.RLyE4QKOFzQEz9-SyExFmw')
+//             .then(response => response.json());
+//     }
+//     });
 
-    document.getElementById('closeButton').addEventListener('click', function() {
-        reverseAnimateZipInfo();
-        map2.setPaintProperty('zipOutline', 'line-opacity', 0);
-    });
+//     document.getElementById('closeButton').addEventListener('click', function() {
+//         reverseAnimateZipInfo();
+//         map2.setPaintProperty('zipOutline', 'line-opacity', 0);
+//     });
 
-});
+// });

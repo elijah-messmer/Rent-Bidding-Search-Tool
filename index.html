@@ -1,18 +1,55 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8' />
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-  </head>
-  <style>
-          body, html {
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Disable scrolling on the main window */
-        }
-  </style>
-  <body>
-    <div style="height: 50px; background-color: green"></div>
-    <iframe src="https://elijah-messmer.github.io/Rent-Bidding-Page/" style="width: 100%; height: 100vh; border: none;"></iframe>
-  </body>
+</head>
+
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Disable scrolling on the main window */
+    }
+
+    #fadeDiv {
+        height: 80px; /* Increased height for a more prominent header */
+        background-color: #333; /* Dark background color */
+        color: #fff; /* Text color */
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle box shadow */
+    }
+
+    #fadeDiv h1 {
+        margin: 0;
+        font-size: 24px;
+    }
+
+    #fadeDiv a {
+        color: #fff;
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 16px;
+    }
+</style>
+
+<body>
+    <div id="fadeDiv">
+        <h1>Boston Globe</h1>
+        <a href="#">Home</a>
+        <a href="#">Politics</a>
+        <a href="#">World</a>
+        <a href="#">Business</a>
+        <a href="#">Technology</a>
+    </div>
+    <iframe id="myIframe" src="https://elijah-messmer.github.io/Rent-Bidding-Page/" style="width: 100%; height: 100vh; border: none;"></iframe>
+
+</body>
+
 </html>

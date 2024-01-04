@@ -15,6 +15,7 @@
 
     #fadeDiv {
         height: 80px; /* Increased height for a more prominent header */
+        width: 100;
         background-color: #333; /* Dark background color */
         color: #fff; /* Text color */
         opacity: 1;
@@ -37,6 +38,21 @@
         margin-left: 20px;
         font-size: 16px;
     }
+  
+  @media (max-width: 767px) {
+    #fadeDiv h1 {
+        margin: 0;
+        font-size: 20px;
+    }
+
+    #fadeDiv a {
+        color: #fff;
+        text-decoration: none;
+        margin-left: 10px;
+        font-size: 12px;
+    }
+  }
+    
 </style>
 
 <body>

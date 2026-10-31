@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-    <link href='https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css' rel='stylesheet' />
+    <link href="vendor/mapbox-gl-2.11.0.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/simplebar@6.0.0/dist/simplebar.min.css" />
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
@@ -14,7 +14,8 @@
   <style>
   body, html {
       height: 100%;
-      background-color: #FBFBFB;
+      overflow: hidden;
+      background-color: #222222; /* Match the dark map so gaps never flash white */
       color: #262626;
       font-size: 18px;
       font-family: georgia, serif;
@@ -98,6 +99,15 @@
       bottom: 0; 
       width: 100%;
       height: 100vh;
+      overflow: hidden;
+      font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
     }
 
     #zipInput {
@@ -181,7 +191,7 @@
       height: 500px;
       z-index: 1;
       background-color: #e1e1e1;
-      max-height: 500px;
+      max-height: min(500px, calc(100vh - 170px)); /* Keep the panel inside short iframes */
       overflow-y: auto;
       visibility: hidden;
       transform: translateX(-100%);
@@ -459,6 +469,7 @@
 
   <body>
     <div id="dashboard">
+      <div id="map"></div>
       <div id="legend2">
         <div class="legend-title2"></div>
       </div>
@@ -605,7 +616,7 @@
         mapboxgl.accessToken =
           "pk.eyJ1IjoiZWxpamFoLW1lc3NtZXIiLCJhIjoiY2xuY2RscTZwMGZoZjJwc21hcmNsa2MzYiJ9.RLyE4QKOFzQEz9-SyExFmw";
         const map2 = new mapboxgl.Map({
-          container: "dashboard",
+          container: "map",
           style: "mapbox://styles/elijah-messmer/cln4vvc0x06wc01ns1l7m0b8m",
           center: centerVar,
           zoom: zoomVar,
@@ -1119,10 +1130,15 @@
               additionalStats.style.display = "block";
               buttonText.innerText = "Show Less";
               buttonText.setAttribute("data-text", "show-less");
-              additionalStats.scrollIntoView({
+              // Scroll only the panel; scrollIntoView would also shift the page
+              const panel = document.querySelector(
+                "#zipInfo .simplebar-content-wrapper"
+              );
+              panel.scrollBy({
+                top:
+                  additionalStats.getBoundingClientRect().top -
+                  panel.getBoundingClientRect().top,
                 behavior: "smooth",
-                block: "nearest",
-                inline: "start",
               });
             } else {
               additionalStats.style.display = "none";

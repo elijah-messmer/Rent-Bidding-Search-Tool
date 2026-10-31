@@ -119,18 +119,18 @@
       list-style-type: none;
       padding: 0;
       display: none;
-      position: relative;
-      z-index: 2;
-      background-color: #f9f9f9;
+      position: absolute; /* Change from relative to absolute */
+      top: 100%;          /* Position it directly below the search input */
+      left: 0;
+      z-index: 10;        /* Ensure it sits above everything else */
+      background-color: #ffffff; 
       border: 1px solid #ccc;
       max-height: 150px;
-      width: 70%;
+      width: 100%;        /* Match the width of your search wrapper */
       overflow-y: auto;
       margin: 0;
-      left: 0;
       box-sizing: border-box;
     }
-
     .autocomplete li {
       padding: 10px;
       cursor: pointer;
